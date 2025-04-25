@@ -1,4 +1,4 @@
-name: Análise de Ações
+name: Agendamento da Análise de Ações
 
 on:
   schedule:
