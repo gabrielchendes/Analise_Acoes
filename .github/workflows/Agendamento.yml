@@ -2,7 +2,7 @@ name: Agendamento da Análise de Ações
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  # Executa a cada 30 minutos (UTC)
+    - cron: '40 13 * * *'  # Executa todos os dias às 10h40 BRT (13h40 UTC)
   workflow_dispatch:        # Permite executar manualmente também
 
 jobs:
