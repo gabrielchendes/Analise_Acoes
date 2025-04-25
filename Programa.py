@@ -131,7 +131,7 @@ async def analisar_acoes():
             print(f"🔴 Alerta! Ação {acao} está em condição de VENDA.")
 
         # Enviar gráfico e resultados para o Telegram
-        await enviar_telegram(filename, f"📊 Análise para {acao}: ")
+        await enviar_telegram(filename, f"📊 Gráfico para análise de {acao} ☝")
 
     # Mostrar resultados finais
     print("\n📊 Resultados do dia:")
