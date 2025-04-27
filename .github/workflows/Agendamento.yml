@@ -12,6 +12,8 @@ jobs:
     env:
       TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
       TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      OUTRO_TELEGRAM_TOKEN: ${{ secrets.OUTRO_TELEGRAM_TOKEN }}
+      OUTRO_TELEGRAM_CHAT_ID: ${{ secrets.OUTRO_TELEGRAM_CHAT_ID }}
 
     steps:
       - name: 📥 Checkout do código
