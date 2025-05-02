@@ -1,5 +1,6 @@
-yfinance
-pandas
-matplotlib
-ta
+yfinance>=0.2.36
+pandas>=2.0.0
+matplotlib>=3.7.0
+ta>=0.10.2
 python-telegram-bot==20.7
+httpx>=0.25.0
