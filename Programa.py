@@ -67,7 +67,7 @@ async def analisar_acoes():
 
 
         # Baixar dados da ação
-        df = yf.download(acao, period="13mo", interval="1d")
+        df = yf.download(acao, period="3mo", interval="1d")
         df.dropna(inplace=True)
 
         # Cálculo da MA20
