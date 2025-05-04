@@ -229,7 +229,8 @@ async def analisar_acoes():
     # Ordenar pela maior variação percentual (absoluta)
     acoes_movimento.sort(key=lambda x: abs(x[2]), reverse=True)
     # Criar uma string final para o alerta
-    alerta_movimentos = "\n📊 Ações ordenadas por maior variação percentual:\n"
+    alerta_movimentos = "\n📊 Ações ordenadas por maior variação percentual (se tiver subido ou caido por 2 ou mais dias):\n"
+
     for acao, movimento, percentual, dias in acoes_movimento:
         if movimento == 'subida':
             alerta_movimentos += f"📈 {acao} subiu {percentual:.2f}% em {dias} dias consecutivos.\n"
@@ -261,11 +262,11 @@ async def analisar_acoes():
         # Ordenar pelo maior RSI
         #rsi_hoje_lista.sort(key=lambda x: x[1], reverse=True)
         alerta_urgente = f"🚨 Alerta Urgente de {hojedata.strftime('%d/%m/%Y')}:\n\n"
-        for acao, rsi_valor in rsi_hoje_lista:
+        for acao, rsi_valor, preco_fechamento_dia_atual2 in rsi_hoje_lista:
             if acao in melhores_para_compra:
-                alerta_urgente += f"📈 {acao} em CONDIÇÃO DE COMPRA, deve subir em breve (RSI={rsi_valor:.2f}).\n\n"
+                alerta_urgente += f"📈 {acao} em CONDIÇÃO DE COMPRA, deve subir em breve (RSI={rsi_valor:.2f} e Preço de Fechamento R${preco_fechamento_dia_atual2:.2f}).\n\n"
             elif acao in melhores_para_venda:
-                alerta_urgente += f"📉 {acao} em CONDIÇÃO DE VENDA, deve cair em breve (RSI={rsi_valor:.2f}).\n\n"
+                alerta_urgente += f"📉 {acao} em CONDIÇÃO DE VENDA, deve cair em breve (RSI={rsi_valor:.2f} e Preço de Fechamento R${preco_fechamento_dia_atual2:.2f})).\n\n"
 
         # Enviar alerta urgente também para o outro bot
         outro_token = os.environ["OUTRO_TELEGRAM_TOKEN"]
