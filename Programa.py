@@ -142,7 +142,9 @@ async def analisar_acoes():
         ultima = df.tail(1).squeeze()
         rsi_hoje = float(ultima['RSI'].iloc[0])  # Corrigido aqui
         nome_acao = acao.replace(".SA", "")
-        rsi_hoje_lista.append((nome_acao, rsi_hoje))
+        dia_atual2 = df.iloc[-1] #add cotacao do dia
+        preco_fechamento_dia_atual2 = float(dia_atual2['Close'].iloc[0])
+        rsi_hoje_lista.append((nome_acao, rsi_hoje, preco_fechamento_dia_atual2))
 
         # Verificar condição de compra
         if rsi_hoje < 30 and float(ultima['Close'].iloc[0]) < float(ultima['bb_lower'].iloc[0]):  # Corrigido aqui
@@ -241,9 +243,12 @@ async def analisar_acoes():
     rsi_hoje_lista.sort(key=lambda x: x[1], reverse=True)
 
     # Criar lista final com as ações e seus RSI
-    lista_rsi = "\n📶 Ações ordenadas por RSI:\n"
-    for acao, rsi_valor in rsi_hoje_lista:
-        lista_rsi += f"{acao}: RSI = {rsi_valor:.2f}\n"
+    lista_rsi = "\n📶 Ações ordenadas por RSI e Preço de Fechamento:\n"
+    for acao, rsi_valor, preco_fechamento_dia_atual2 in rsi_hoje_lista:
+        lista_rsi += f"{acao}: RSI = {rsi_valor:.2f} |  R${preco_fechamento_dia_atual2:.2f}\n"
+
+    if alerta_urgente_sinal == 1:
+        lista_rsi += f"\n🚨 Alerta Urgente hoje"
 
     # Enviar o alerta final
     alerta_final += lista_rsi
